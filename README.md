@@ -97,4 +97,5 @@ Optional input variable file defined by a user for the task above.
 elb_name.tfvars
 ```hcl
 "elbname = "terraform-example-elb""
+"region = "us-east-1""
 ```

@@ -13,4 +13,6 @@ resource "aws_elb_attachment" "elb_underlay" {
   instance = each.value.node
 }
 
-
+provider "aws" {
+  region = var.region
+}

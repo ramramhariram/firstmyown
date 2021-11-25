@@ -27,3 +27,5 @@ variable "services" {
 variable "elbname" {
 	type        = string
 }
+
+variable "region" {}

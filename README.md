@@ -46,45 +46,77 @@ Consul Enterprise, CTS Enterprise and Terraform Cloud Enterprise (TFE or TFCB)
 | elb_name | true | The name of an existing ELB |
 
 **User Config for Consul Terraform Sync**
+
 #general
+
 log_level = "INFO"
+
 port = 8558
+
 syslog {}
+
 license_path = "$$Local-directory-exact"
+
 buffer_period {
+
   enabled = true
+
   min = "5s"
+
   max = "20s"
 }
 
 #Consul connection
+
 consul {
-  address = "Consul UI:port"
-  token = "CTS TOKEN"
-  tls {
-  enabled = true
-  verify = true
-  ca_cert = ""$$Local-directory-exact"/consul-agent-ca.pem"
-  cert = ""$$Local-directory-exact"/$$client-agent-ca.pem"
-  key = "/home/ubuntu/$$client-agent-ca-key.pem"
-  server_name = "localhost"
+
+address = "Consul UI:port"
+
+token = "CTS TOKEN"
+
+tls {
+
+enabled = true
+
+verify = true
+
+ca_cert = ""$$Local-directory-exact"/consul-agent-ca.pem"
+
+cert = ""$$Local-directory-exact"/$$client-agent-ca.pem"
+
+key = "/home/ubuntu/$$client-agent-ca-key.pem"
+
+server_name = "localhost"
+
 }
+
 }
 
 task {
- name        = "reinvent-demo-ELB"
- description = "Add instance to ELB"
- source      = "github.com/ramramhariram/underlay"
- services    = "[$$service-name-1,...., $$service-name-n]"
- variable_files = "/home/ubuntu/elb_name.tfvars"
+
+name        = "reinvent-demo-ELB"
+
+description = "Add instance to ELB"
+
+source      = "github.com/ramramhariram/underlay"
+
+services    = "[$$service-name-1,...., $$service-name-n]"
+
+variable_files = "/home/ubuntu/elb_name.tfvars"
+
 }
 
 
 #TF CLOUD driver details
+
 driver "terraform-cloud" {
-  hostname     = "https://app.terraform.io"
-  organization = "$$org-name"
-  token        = "$$org-token"
+
+hostname     = "https://app.terraform.io"
+
+organization = "$$org-name"
+
+token        = "$$org-token"
+
 }
 
 

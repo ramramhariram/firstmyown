@@ -8,16 +8,11 @@ terraform {
 }
 
 resource "aws_elb_attachment" "elb_underlay" {
-  for_each = local.cts_services
+  for_each = var.services
   elb      = var.elbname
   instance = each.value.node
 }
 
 provider "aws" {
   region = var.region
-}
-
-
-locals {
-  cts_services = { for k,v in var.services : k => v if v["status"] == "passing" }
 }
